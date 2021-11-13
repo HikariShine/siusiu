@@ -20,7 +20,7 @@ func NotFoundHandler(c *ishell.Context) {
 		case 1:
 			dir = os.Getenv("HOME")
 		default:
-			return
+			dir = args[1]
 		}
 		if err := os.Chdir(dir); err != nil {
 			logrus.Error("os.Chdir failed,err:", err)
