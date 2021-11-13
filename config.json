@@ -121,6 +121,12 @@
             "Name":"crawlergo",
             "Help":"使用chrome headless模式进行URL收集的浏览器爬虫",
             "Run":"crawlergo/run.sh"
+        },
+        {
+            "Name":"wuzz",
+            "Help":"http 请求发送工具",
+            "Run":"wuzz/run.sh"
         }
+
     ]
 }
