@@ -1,6 +1,6 @@
 .PHONY: all build_linux build_mac build_win run gotool clean help
 
-BINARY="biu"
+BINARY="siusiu"
 
 all: gotool build_mac
 

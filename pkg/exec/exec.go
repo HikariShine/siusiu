@@ -5,24 +5,13 @@ import (
 	"os"
 	"os/exec"
 	"os/signal"
-	"siusiu/settings"
-	"strings"
 
 	"github.com/sirupsen/logrus"
 )
 
-//Bash bash 执行 shell脚本
-func Bash(scriptName string, args []string) {
-	execPath := settings.GetToolExecPath(scriptName)
-	params := strings.Join(args, " ")
-	CmdExec("/bin/bash", execPath, params)
-}
-
-//Python3 执行python3脚本
-func Python3(scriptName string, args []string) {
-	execPath := settings.GetToolExecPath("py/" + scriptName)
-	params := strings.Join(args, " ")
-	CmdExec("python3", execPath, params)
+func Docker(name string, args []string) {
+	params := append([]string{"run", "--rm", "-i", "--network", "host", name}, args...)
+	CmdExec("docker", params...)
 }
 
 func CmdExec(name string, args ...string) {
