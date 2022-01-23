@@ -42,4 +42,5 @@ func NotFoundHandler(c *ishell.Context) {
 		return
 	}
 	exec.CmdExec("/bin/bash", "-c", input)
+	fmt.Println("")
 }
