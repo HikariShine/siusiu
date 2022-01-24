@@ -11,7 +11,7 @@ import (
 )
 
 func Docker(name string, args []string) {
-	params := append([]string{"run", "--rm", "-i", "--network", "host", name}, args...)
+	params := append([]string{"run", "--rm", "-it", "--network", "host", name}, args...)
 	CmdExec("docker", params...)
 }
 

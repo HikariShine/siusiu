@@ -43,7 +43,13 @@ func Init(shell *ishell.Shell) error {
 		Name: "dirsearch",
 		Help: "目录爆破工具",
 		Func: func(c *ishell.Context) {
-			exec.Docker("rickshang/dirsearch:0.4.2", c.Args)
+			currentDir, err := os.Getwd()
+			if err != nil {
+				log.Println("os.Getwd failed,err:", err)
+				return
+			}
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/root/reports", "-w", "/root/reports", "rickshang/dirsearch:0.4.2"}, c.Args...)
+			exec.CmdExec("docker", params...)
 		},
 	})
 	shell.AddCmd(&ishell.Cmd{
@@ -51,6 +57,13 @@ func Init(shell *ishell.Shell) error {
 		Help: "模糊测试工具",
 		Func: func(c *ishell.Context) {
 			exec.Docker("rickshang/ffuf:1.3.1", c.Args)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "whatweb",
+		Help: "web指纹识别",
+		Func: func(c *ishell.Context) {
+			exec.Docker("bberastegui/whatweb", c.Args)
 		},
 	})
 	shell.AddCmd(&ishell.Cmd{
@@ -85,6 +98,33 @@ func Init(shell *ishell.Shell) error {
 				return
 			}
 			params := append([]string{"run", "--rm", "-it", "-v", currentDir + ":/src", "-w", "/src", "bartimar/steghide"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "http3-client",
+		Help: "支持http3的客户端",
+		Func: func(c *ishell.Context) {
+			exec.Docker("rickshang/http3-client", c.Args)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "gopherus",
+		Help: "ssrf漏洞gopher协议payload生成工具",
+		Func: func(c *ishell.Context) {
+			exec.Docker("rickshang/gopherus", c.Args)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "firefox-decrypt",
+		Help: "firefox浏览器密码提取工具",
+		Func: func(c *ishell.Context) {
+			currentDir, err := os.Getwd()
+			if err != nil {
+				log.Println("os.Getwd failed,err:", err)
+				return
+			}
+			params := append([]string{"run", "--rm", "-it", "-v", currentDir + ":/tmp", "-w", "/tmp", "rickshang/firefox-decrypt"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})
