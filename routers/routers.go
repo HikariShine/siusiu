@@ -56,7 +56,13 @@ func Init(shell *ishell.Shell) error {
 		Name: "ffuf",
 		Help: "模糊测试工具",
 		Func: func(c *ishell.Context) {
-			exec.Docker("rickshang/ffuf:1.3.1", c.Args)
+			currentDir, err := os.Getwd()
+			if err != nil {
+				log.Println("os.Getwd failed,err:", err)
+				return
+			}
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/tmp", "-w", "/tmp", "rickshang/ffuf:1.3.1"}, c.Args...)
+			exec.CmdExec("docker", params...)
 		},
 	})
 	shell.AddCmd(&ishell.Cmd{
@@ -125,6 +131,19 @@ func Init(shell *ishell.Shell) error {
 				return
 			}
 			params := append([]string{"run", "--rm", "-it", "-v", currentDir + ":/tmp", "-w", "/tmp", "rickshang/firefox-decrypt"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "hydra",
+		Help: "弱口令爆破工具",
+		Func: func(c *ishell.Context) {
+			currentDir, err := os.Getwd()
+			if err != nil {
+				log.Println("os.Getwd failed,err:", err)
+				return
+			}
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/tmp", "-w", "/tmp", "rickshang/thc-hydra"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})

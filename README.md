@@ -18,46 +18,22 @@ siusiu提供了一个shell控制台，通过该控制台，可以：
 siusiu > help
 
 Commands:
-  GitHack                    .git泄漏利用脚本
-  Glass                      针对资产列表的快速指纹识别工具
-  SecList                    各种字典、webshell合集
-  TPscan                     一键ThinkPHP漏洞检测
-  Vulcan                     资产扫描工具(红队)
-  XMLmining                  从xlsx、pptx、docx 文件的metadata中挖掘有用信息的工具
-  arp-spoofing               局域网内主机扫描，ARP投毒、中间人攻击、敏感信息嗅探，HTTP报文嗅探
-  backup-dict                生成网站备份字典
-  baidu                      baidu url采集
-  c-segment-scan             c段弱点发现
-  clear                      clear the screen
-  cms-fingerprint            cms指纹识别
-  demos                      获取工具的使用样例
-  dir-collector              采集某个项目的所有目录名
-  dirsearch                  目录扫描器
-  ds_store_exp               macOS .DS_Store文件泄漏利用脚本
-  dvcs-ripper                SVN 泄漏利用脚本
-  exit                       exit the program
-  help                       display help
-  influx                     influx 配置疏忽漏洞利用
-  nmap                       端口扫描器
-  one-for-all                一款功能强大的子域名收集工具
-  passwd-based-domain        基于域名生成若口令字典,常用于爆破网站后台密码
-  passwd-based-userinfo      基于用户资料生成弱口令字典
-  passwd-guess               弱口令爆破器,支持:ssh,ftp,mysql,redis,mssql,postgresql,mongodb
-  pocsuite3-cli              poc框架(命令行模式)
-  pocsuite3-console          poc框架(控制台模式)
-  port-scan                  主动扫描端口
-  proxy-collector            代理采集
-  shiro-attack               shiro反序列化漏洞综合利用工具(GUI)
-  shodan                     通过shodan被动扫描目标主机
-  sqlmap                     自动化sql注入工具
-  url-collector              搜索引擎URL采集器(goole,bing)
-  vim-swp-exp                vim swp 文件泄漏利用工具
-  vulhub                     漏洞靶场镜像库
-  wafw00f                    waf指纹识别
-  whois                      whois查询
-  xray                       漏洞扫描器
-  zenmap                     nmap-gui 版本,一个端口扫描器
-
+  clear                clear the screen
+  crawlergo            使用chrome headless模式进行URL收集的浏览器爬虫
+  dirsearch            目录爆破工具
+  exit                 exit the program
+  ffuf                 模糊测试工具
+  firefox-decrypt      firefox浏览器密码提取工具
+  gopherus             ssrf漏洞gopher协议payload生成工具
+  help                 display help
+  http3-client         支持http3的客户端
+  hydra                弱口令爆破工具
+  nmap                 主机发现、端口扫描、服务扫描、版本识别
+  sqlmap               SQL注入攻击工具
+  steghide             隐写术工具
+  stegseek             爆破隐写术密码
+  tool-helper          获取工具的帮助文档
+  whatweb              web指纹识别
 ```
 
 ## Installation:
