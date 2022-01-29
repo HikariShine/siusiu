@@ -138,12 +138,52 @@ func Init(shell *ishell.Shell) error {
 		Name: "hydra",
 		Help: "弱口令爆破工具",
 		Func: func(c *ishell.Context) {
+			//1.查询本地是否有hydra
 			currentDir, err := os.Getwd()
 			if err != nil {
 				log.Println("os.Getwd failed,err:", err)
 				return
 			}
 			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/tmp", "-w", "/tmp", "rickshang/thc-hydra"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "wfuzz",
+		Help: "web应用fuzz工具",
+		Func: func(c *ishell.Context) {
+			currentDir, err := os.Getwd()
+			if err != nil {
+				log.Println("os.Getwd failed,err:", err)
+				return
+			}
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/tmp", "-w", "/tmp", "ghcr.io/xmendez/wfuzz", "wfuzz"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "cewl",
+		Help: "爬去网站关键字以生成字典",
+		Func: func(c *ishell.Context) {
+			currentDir, err := os.Getwd()
+			if err != nil {
+				log.Println("os.Getwd failed,err:", err)
+				return
+			}
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/tmp", "-w", "/tmp", "nocflame/cewl"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "davtest",
+		Help: "webdav利用工具",
+		Func: func(c *ishell.Context) {
+			currentDir, err := os.Getwd()
+			if err != nil {
+				log.Println("os.Getwd failed,err:", err)
+				return
+			}
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/tmp", "-w", "/tmp", "rickshang/davtest"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})
