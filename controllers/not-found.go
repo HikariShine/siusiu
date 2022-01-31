@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"os"
+	"runtime"
 	"siusiu/pkg/exec"
 	"strings"
 
@@ -41,6 +42,11 @@ func NotFoundHandler(c *ishell.Context) {
 		c.SetPrompt(GetShellPrompt())
 		return
 	}
-	exec.CmdExec("/bin/bash", "-c", input)
+	//判断操作系统类型
+	if runtime.GOOS == "windows" {
+		exec.CmdExec("cmd", "/c", input)
+	} else {
+		exec.CmdExec("/bin/bash", "-c", input)
+	}
 	fmt.Println("")
 }
