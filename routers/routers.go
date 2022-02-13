@@ -191,7 +191,12 @@ func Init(shell *ishell.Shell) error {
 		Name: "xray",
 		Help: "安全评估工具",
 		Func: func(c *ishell.Context) {
-			params := append([]string{"run", "--rm", "-it", "--network", "host", "rickshang/xray:1.8.4"}, c.Args...)
+			currentDir, err := os.Getwd()
+			if err != nil {
+				log.Println("os.Getwd failed,err:", err)
+				return
+			}
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/tmp", "-w", "/tmp", "rickshang/xray:1.8.4"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})
