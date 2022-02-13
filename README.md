@@ -14,34 +14,40 @@ siusiu提供了一个shell控制台，通过该控制台，可以：
 
 ## Usage：
 ```
-siusiu > help
+siusiu:/ > help
 
 Commands:
+  cewl                 爬去网站关键字以生成字典
   clear                clear the screen
   crawlergo            使用chrome headless模式进行URL收集的浏览器爬虫
+  davtest              webdav利用工具
   dirsearch            目录爆破工具
+  ds_store_exp         .DS_Store 文件泄漏利用脚本
   exit                 exit the program
   ffuf                 模糊测试工具
   firefox-decrypt      firefox浏览器密码提取工具
+  gobuster             目录扫描工具（dirsearch拉跨时备用）
   gopherus             ssrf漏洞gopher协议payload生成工具
   help                 display help
   http3-client         支持http3的客户端
   hydra                弱口令爆破工具
   nmap                 主机发现、端口扫描、服务扫描、版本识别
+  pocsuite3            poc测试框架
   sqlmap               SQL注入攻击工具
   steghide             隐写术工具
   stegseek             爆破隐写术密码
+  svn-exp              svn-exp 文件泄漏利用脚本
   tool-helper          获取工具的帮助文档
+  wfuzz                web应用fuzz工具
   whatweb              web指纹识别
+  xray                 安全评估工具
+
 ```
 
 ## Installation:
 
 ```
-wget https://gitee.com/nothing-is-nothing/siusiu/raw/master/setup.sh
-chmod +x setup.sh
-./setup.sh
-siusiu
+
 ```
 
 ## Screenshots
@@ -55,85 +61,8 @@ siusiu
 
 ## Tested On  
 
-- MacOS
-- CentOS7
-- Ubuntu
+新版本基于docker构建，只要是安装了docker的主机的，都可以正常运行。老版本基于shell脚本构建，只能在linux和mac环境下运行。
 
-## Develop  
-
-如果您有其他好的安全工具也想集成到siusiu中，可以按照如下步骤操作：  
-step1.在siusiu安装目录（$HOME/src/siusiu）下创建对应的工具目录（建议以工具名命名,例如：dirsearch），并在该目录下创建该工具的shell脚本 run.sh，例如：
-
-```shell
-#!/bin/bash
-base_path=$HOME/src
-dirsearch_path=$base_path/dirsearch
-
-function download {
-    git clone https://github.com.cnpmjs.org/maurosoria/dirsearch.git $1
-    cd $1
-    pip3 install -r requirements.txt
-}
-
-#1.检查程序目录是否存在
-if [ ! -d $dirsearch_path ]; then
-    #2.如果不存在就下载
-    echo "[*] download dirsearch..."
-    download $dirsearch_path
-fi
-#运行dirsearch
-python3 $dirsearch_path/dirsearch.py $*
-```
-step2. 在config.json 配置文件中添加对应工具，例如：
-```
-        {
-            "Name": "dirsearch",
-            "Help": "目录扫描器",
-            "Run": "dirsearch/run.sh"
-        },
-```
-其中name为工具名，help为工具描述，run为该工具的run.sh在myvendor目录下的相对路径
-
-## 为工具编写demo文档
-
-不知道你是否也曾有过这样的烦恼：每天疲于学习各种工具的使用方法,当真正需要使用某个工具的时候，却一时半会儿想不起某个工具怎么用，这时你翻开了你的笔记本，找呀找，终于找到了以前的笔记。  
-关于这个问题，siusiu提供一种解决方案：将工具的使用文档或者常用demo集成在shell控制台中，需要时直接通过命令：demos+工具名 查看即可。  
-你可以将你常用的一些命令demo，以markdown文档的方式写在 $HOME/src/siusiu/myvendor/demos 目录下，siusiu控制台会自动读取该目录。  
-例如为sqlmap编写常用demo文档：
-
-```markdown
-# sqlmap demoes
-
-```shell
-# -m 批量扫描 —batch 全部采用默认行为，不向用户请求y/n,并且使用随机的user—agnet
-sqlmap -m temp2.txt --batch --random-agent> result.txt
-
-# 尝试获取所有数据库名
-sqlmap -u url --dbs —-random-agent --batch
-
-# 获取表名
-sqlmap -u url --tables —-random-agent --batch
-
-# 尝试获取所有用户:
-sqlmap -u url --users --random-agent --batch
-
-# 尝试获取账号密码:
-sqlmap -u url --password --random-agent --batch
-
-# 尝试获取当前用户:
-sqlmap -u url --current-user --random-agent --batch
-
-# 测试当前用户权限:
-sqlmap -u url --is-dba --random-agent --batch
-
-# 尝试写入木马,getshell
-sqlmap -u url --os-shell --random-agent --batch
-
-# 执行指定的sql语句
-sqlmap.py -u url -v 1 --sql-query 'select top 20 * from City'
-```
-
-在siusiu控制台中通过 demos sqlmap.md 即可查看该文档。  
 
 ## QA
 

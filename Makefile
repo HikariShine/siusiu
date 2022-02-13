@@ -2,14 +2,14 @@
 
 BINARY="siusiu"
 
-all: gotool build_mac
+all: build_linux build_win build_mac
 
 build_linux:
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ${BINARY}-linux-docker
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ${BINARY}_linux_amd64
 build_win:
-	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o ${BINARY}-docker.exe	
+	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o ${BINARY}.exe	
 build_mac:
-	CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o ${BINARY}-mac-docker
+	CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o ${BINARY}_darwin_amd64
 
 
 run:
