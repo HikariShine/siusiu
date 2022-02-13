@@ -50,9 +50,7 @@ Commands:
 
 ## Installation:
 
-```
-
-```
+点击docker发行版，下载对应的版本并赋予可执行权限即可。
 
 ## Screenshots
 
