@@ -44,6 +44,10 @@ Commands:
 
 ```
 
+## Tested On  
+
+新版本基于docker构建，只要是安装了docker的主机的，都可以正常运行。老版本基于shell脚本构建，只能在linux和mac环境下运行。
+
 ## Installation:
 
 ```
@@ -59,9 +63,6 @@ Commands:
 ![avatar](https://img-blog.csdnimg.cn/20211006160557298.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5peg5Zyo5peg5LiN5Zyo,size_20,color_FFFFFF,t_70,g_se,x_16)
 
 
-## Tested On  
-
-新版本基于docker构建，只要是安装了docker的主机的，都可以正常运行。老版本基于shell脚本构建，只能在linux和mac环境下运行。
 
 
 ## QA
