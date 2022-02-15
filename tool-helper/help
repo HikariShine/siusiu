@@ -1,0 +1,16 @@
+#!/bin/sh
+#判断输入参数的个数
+if [ $# -ne 1 ];then
+    #删除.md后缀
+    echo "Usage: $0 <filename>"
+    ls -lh /help | awk '{print $9}' | grep -v "^$" |  awk 'BEGIN{FS="."}{print "\t"$1}'  | grep -v "help"  
+    exit 1
+else 
+    #判断文件是否存在
+    if [ -f /help/$1.md ];then
+        cat /help/$1.md
+    else
+        echo "File /help/$1 not found"
+        exit 2
+    fi
+fi
