@@ -278,6 +278,19 @@ func Init(shell *ishell.Shell) error {
 			exec.CmdExec("docker", params...)
 		},
 	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "searchsploit",
+		Help: "exp/poc搜索工具",
+		Func: func(c *ishell.Context) {
+			currentDir, err := os.Getwd()
+			if err != nil {
+				log.Println("os.Getwd failed,err:", err)
+				return
+			}
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/tmp", "-w", "/tmp", "rickshang/searchsploit"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
 	//未找到命令时
 	shell.NotFound(controllers.NotFoundHandler)
 	return nil
