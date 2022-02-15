@@ -33,6 +33,9 @@ Commands:
   hydra                弱口令爆破工具
   nmap                 主机发现、端口扫描、服务扫描、版本识别
   pocsuite3            poc测试框架
+  searchsploit         exp/poc搜索工具
+  smbmap               smb服务利用工具
+  smtp-user-enum       SMTP用户名枚举工具
   sqlmap               SQL注入攻击工具
   steghide             隐写术工具
   stegseek             爆破隐写术密码
@@ -60,9 +63,40 @@ Commands:
 在siusiu控制台中运行sqlmap和dirsearch
 ![avatar](https://img-blog.csdnimg.cn/20211006160557298.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5peg5Zyo5peg5LiN5Zyo,size_20,color_FFFFFF,t_70,g_se,x_16)
 
-
-
-
+## Help
+### 关于searchsploit的一些使用说明
+由于 searchsploit 所有的exp和poc都封装在容器中，所以如果想要将exp/poc拷贝到本机，可以通过下面的命令：
+step1. 查看exp/poc的具体位置
+```
+searchsploit -p <id>
+```
+step2. 拷贝exp/poc到当前目录
+```
+searchsploit cp <exp/poc的绝对路径>
+```
+### 关于tool-helper
+tool-helper 是一个封装了工具使用样例的镜像，通过tool-helper <工具名>可以在不离开shell的情况下查看工具的使用样例
+```
+tool-helper
+Usage: ./help <filename>
+        crawlergo
+        dirsearch
+        ffuf
+        gdb
+        gobuster
+        hydra
+        masscan
+        nmap
+        searchsploit
+        smbmap
+        spawn_shell
+        sqlmap
+        steghide
+        stegseek
+        url-collector
+        wafw00f
+        xray
+```
 ## QA
 
 问：我喜欢作者怎么办？  
