@@ -48,7 +48,7 @@ func Init(shell *ishell.Shell) error {
 				log.Println("os.Getwd failed,err:", err)
 				return
 			}
-			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/root/reports", "-w", "/root/reports", "rickshang/dirsearch:0.4.2"}, c.Args...)
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/root/reports", "-w", "/root/reports", "rickshang/dirsearch"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})
@@ -196,7 +196,20 @@ func Init(shell *ishell.Shell) error {
 				log.Println("os.Getwd failed,err:", err)
 				return
 			}
-			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/tmp", "-w", "/tmp", "rickshang/xray:1.8.4"}, c.Args...)
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/tmp/xray", "-w", "/tmp/xray", "rickshang/xray:1.8.4private"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "xray-listen",
+		Help: "xray监听工具",
+		Func: func(c *ishell.Context) {
+			currentDir, err := os.Getwd()
+			if err != nil {
+				log.Println("os.Getwd failed,err:", err)
+				return
+			}
+			params := append([]string{"run", "--rm", "-it", "-v", currentDir + ":/tmp/xray", "-w", "/tmp/xray", "-p", "7777:7777", "rickshang/xray:1.8.4private", "webscan", "--listen", "0.0.0.0:7777", "--html-output", "xray-result.html"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})
@@ -288,6 +301,19 @@ func Init(shell *ishell.Shell) error {
 				return
 			}
 			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/tmp", "-w", "/tmp", "rickshang/searchsploit"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "jsfinder",
+		Help: "从js源码提取URL，子域名的工具。",
+		Func: func(c *ishell.Context) {
+			currentDir, err := os.Getwd()
+			if err != nil {
+				log.Println("os.Getwd failed,err:", err)
+				return
+			}
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/tmp", "-w", "/tmp", "rickshang/jsfinder"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})
