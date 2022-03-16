@@ -51,9 +51,23 @@ Commands:
 
 新版本基于docker构建，只要是安装了docker的主机的，都可以正常运行。老版本基于shell脚本构建，只能在linux和mac环境下运行。
 
-## Installation:
+## Installation
+
+### 下载二进制文件
 
 点击docker发行版，下载对应的版本并赋予可执行权限即可。
+
+### go安装
+
+```shell
+go get github.com/ShangRui-hash/siusiu@latest
+```
+
+或者
+
+```shell
+go install github.com/ShangRui-hash/siusiu@latest 
+```
 
 ## Screenshots
 
