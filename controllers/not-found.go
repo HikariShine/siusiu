@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"os"
 	"runtime"
-	"siusiu/pkg/exec"
+
 	"strings"
 
+	"github.com/ShangRui-hash/siusiu/pkg/exec"
 	"github.com/abiosoft/ishell"
 	"github.com/fatih/color"
 	"github.com/sirupsen/logrus"

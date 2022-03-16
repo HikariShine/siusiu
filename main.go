@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 	"os"
-	"siusiu/controllers"
-	"siusiu/routers"
 
+	"github.com/ShangRui-hash/siusiu/controllers"
+	"github.com/ShangRui-hash/siusiu/routers"
 	"github.com/abiosoft/ishell"
 	"github.com/abiosoft/readline"
 )

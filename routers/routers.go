@@ -3,9 +3,9 @@ package routers
 import (
 	"log"
 	"os"
-	"siusiu/controllers"
-	"siusiu/pkg/exec"
 
+	"github.com/ShangRui-hash/siusiu/controllers"
+	"github.com/ShangRui-hash/siusiu/pkg/exec"
 	"github.com/abiosoft/ishell"
 )
 
