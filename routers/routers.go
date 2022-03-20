@@ -360,12 +360,7 @@ func Init(shell *ishell.Shell) error {
 		Name: "wpscan",
 		Help: "wordpress漏洞扫描工具",
 		Func: func(c *ishell.Context) {
-			currentDir, err := os.Getwd()
-			if err != nil {
-				log.Println("os.Getwd failed,err:", err)
-				return
-			}
-			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/wpscan", "-w", "/wpscan", "wpscanteam/wpscan"}, c.Args...)
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "wpscanteam/wpscan"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})
