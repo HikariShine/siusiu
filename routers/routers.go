@@ -48,7 +48,7 @@ func Init(shell *ishell.Shell) error {
 				log.Println("os.Getwd failed,err:", err)
 				return
 			}
-			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/root/reports", "-w", "/root/reports", "rickshang/dirsearch"}, c.Args...)
+			params := append([]string{"run", "--rm", "-it", "-v", currentDir + ":/root/reports", "-w", "/root/reports", "rickshang/dirsearch"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})
@@ -353,6 +353,19 @@ func Init(shell *ishell.Shell) error {
 				return
 			}
 			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/waybackurls", "-w", "/waybackurls", "rickshang/waybackurls"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "wpscan",
+		Help: "wordpress漏洞扫描工具",
+		Func: func(c *ishell.Context) {
+			currentDir, err := os.Getwd()
+			if err != nil {
+				log.Println("os.Getwd failed,err:", err)
+				return
+			}
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/wpscan", "-w", "/wpscan", "wpscanteam/wpscan"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})
