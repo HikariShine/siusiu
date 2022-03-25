@@ -364,6 +364,14 @@ func Init(shell *ishell.Shell) error {
 			exec.CmdExec("docker", params...)
 		},
 	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "gau",
+		Help: "根据域名进行被动url收集(open threat+wayback machine+common crawl)",
+		Func: func(c *ishell.Context) {
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "sxcurity/gau:latest"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
 	//未找到命令时
 	shell.NotFound(controllers.NotFoundHandler)
 	return nil
