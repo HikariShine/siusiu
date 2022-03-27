@@ -189,7 +189,7 @@ func Init(shell *ishell.Shell) error {
 	})
 	shell.AddCmd(&ishell.Cmd{
 		Name: "xray",
-		Help: "安全评估工具",
+		Help: "漏洞扫描器",
 		Func: func(c *ishell.Context) {
 			currentDir, err := os.Getwd()
 			if err != nil {
@@ -369,6 +369,14 @@ func Init(shell *ishell.Shell) error {
 		Help: "根据域名进行被动url收集(open threat+wayback machine+common crawl)",
 		Func: func(c *ishell.Context) {
 			params := append([]string{"run", "--rm", "-it", "--network", "host", "sxcurity/gau:latest"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "amass",
+		Help: "信息收集工具",
+		Func: func(c *ishell.Context) {
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "caffix/amass"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})
