@@ -368,7 +368,7 @@ func Init(shell *ishell.Shell) error {
 		Name: "gau",
 		Help: "根据域名进行被动url收集(open threat+wayback machine+common crawl)",
 		Func: func(c *ishell.Context) {
-			params := append([]string{"run", "--rm", "-it", "--network", "host", "sxcurity/gau:latest"}, c.Args...)
+			params := append([]string{"run", "--rm", "-i", "--network", "host", "sxcurity/gau:latest"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})
@@ -377,6 +377,14 @@ func Init(shell *ishell.Shell) error {
 		Help: "信息收集工具",
 		Func: func(c *ishell.Context) {
 			params := append([]string{"run", "--rm", "-it", "--network", "host", "caffix/amass"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "payloads-all-the-things",
+		Help: "payloads大全",
+		Func: func(c *ishell.Context) {
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "rickshang/payloads-all-the-things"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})
