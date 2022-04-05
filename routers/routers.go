@@ -163,7 +163,7 @@ func Init(shell *ishell.Shell) error {
 	})
 	shell.AddCmd(&ishell.Cmd{
 		Name: "cewl",
-		Help: "爬去网站关键字以生成字典",
+		Help: "爬取网站关键字以生成字典",
 		Func: func(c *ishell.Context) {
 			currentDir, err := os.Getwd()
 			if err != nil {
@@ -393,6 +393,14 @@ func Init(shell *ishell.Shell) error {
 		Help: "用于发现 JavaScript 文件中的端点及其参数",
 		Func: func(c *ishell.Context) {
 			params := append([]string{"run", "--rm", "-it", "--network", "host", "rickshang/linkfinder"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "arjun",
+		Help: "传参发现工具",
+		Func: func(c *ishell.Context) {
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "rickshang/arjun"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})

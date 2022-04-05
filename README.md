@@ -19,7 +19,8 @@ siusiu:/ > help
 Commands:
   403bypasser                  403绕过工具
   amass                        信息收集工具
-  cewl                         爬去网站关键字以生成字典
+  arjun                        传参发现工具
+  cewl                         爬取网站关键字以生成字典
   clear                        clear the screen
   crawlergo                    使用chrome headless模式进行URL收集的浏览器爬虫
   cve-2018-15473-exp           ssh 用户名枚举漏洞利用工具
