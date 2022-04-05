@@ -94,7 +94,17 @@ go install github.com/ShangRui-hash/siusiu@latest
 在siusiu控制台中运行sqlmap和dirsearch
 ![avatar](https://img-blog.csdnimg.cn/20211006160557298.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5peg5Zyo5peg5LiN5Zyo,size_20,color_FFFFFF,t_70,g_se,x_16)
 
-## Help
+## 使用技巧
+
+### tab 
+tab 键可以自动补全命令
+
+### 构建工作流
+
+```shell
+siusiu exec linkfinder -i target.js -o cli | wc -l
+``` 
+
 ### 关于searchsploit的一些使用说明
 由于 searchsploit 所有的exp和poc都封装在容器中，所以如果想要将exp/poc拷贝到本机，可以通过下面的命令：
 step1. 查看exp/poc的具体位置
