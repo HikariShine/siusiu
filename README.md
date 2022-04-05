@@ -36,6 +36,7 @@ Commands:
   http3-client                 支持http3的客户端
   hydra                        弱口令爆破工具
   jsfinder                     从js源码提取URL，子域名的工具。
+  linkfinder                   用于发现 JavaScript 文件中的端点及其参数
   nmap                         主机发现、端口扫描、服务扫描、版本识别
   payloads-all-the-things      payloads大全
   pocsuite3                    poc测试框架
