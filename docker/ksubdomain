@@ -1,0 +1,14 @@
+FROM becivells/gobase-1.7 as builder
+
+
+RUN go install -v github.com/boy-hack/ksubdomain/cmd/ksubdomain@latest
+
+
+
+FROM alpine
+
+COPY --from=builder /root/go/bin/ /usr/local/bin/
+RUN apk add  --no-cache libpcap-dev && mkdir /app
+WORKDIR /app/
+
+ENTRYPOINT ["/usr/local/bin/ksubdomain"]

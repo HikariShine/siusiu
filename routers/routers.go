@@ -404,6 +404,14 @@ func Init(shell *ishell.Shell) error {
 			exec.CmdExec("docker", params...)
 		},
 	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "ksubdomain",
+		Help: "子域名爆破工具",
+		Func: func(c *ishell.Context) {
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "rickshang/ksubdomain"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
 	//未找到命令时
 	shell.NotFound(controllers.NotFoundHandler)
 	return nil
