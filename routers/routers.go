@@ -420,6 +420,23 @@ func Init(shell *ishell.Shell) error {
 			exec.CmdExec("docker", params...)
 		},
 	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "fetcher",
+		Help: "用于将指定目录制作为字典",
+		Func: func(c *ishell.Context) {
+			if len(c.Args) < 1 {
+				c.Println("Usage: fetcher [path]")
+				c.Println("example: fetcher /root/dict")
+				c.Println("example: fetcher ./")
+				return
+			}
+			if c.Args[0] == "." || c.Args[0] == "./" {
+				c.Args[0], _ = os.Getwd()
+			}
+			params := append([]string{"run", "--rm", "-it", "-v", c.Args[0] + ":/dict", "-w", "/dict", "rickshang/fetcher", "."})
+			exec.CmdExec("docker", params...)
+		},
+	})
 	//未找到命令时
 	shell.NotFound(controllers.NotFoundHandler)
 	return nil

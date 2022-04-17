@@ -22,12 +22,14 @@ Commands:
   arjun                        传参发现工具
   cewl                         爬取网站关键字以生成字典
   clear                        clear the screen
+  cloudfail                    用于寻找cloudflare背后的真实IP
   crawlergo                    使用chrome headless模式进行URL收集的浏览器爬虫
   cve-2018-15473-exp           ssh 用户名枚举漏洞利用工具
   davtest                      webdav利用工具
   dirsearch                    目录爆破工具
   ds_store_exp                 .DS_Store 文件泄漏利用脚本
   exit                         exit the program
+  fetcher                      用于将指定目录制作为字典
   ffuf                         模糊测试工具
   firefox-decrypt              firefox浏览器密码提取工具
   gau                          根据域名进行被动url收集(open threat+wayback machine+common crawl)
@@ -37,6 +39,7 @@ Commands:
   http3-client                 支持http3的客户端
   hydra                        弱口令爆破工具
   jsfinder                     从js源码提取URL，子域名的工具。
+  ksubdomain                   子域名爆破工具
   linkfinder                   用于发现 JavaScript 文件中的端点及其参数
   nmap                         主机发现、端口扫描、服务扫描、版本识别
   payloads-all-the-things      payloads大全
@@ -100,11 +103,29 @@ go install github.com/ShangRui-hash/siusiu@latest
 
 ### tab 
 tab 键可以自动补全命令
-
+### 搜索指定工具
+例如：搜索和web相关的工具
+```
+siusiu exec help  | grep web
+  davtest                      webdav利用工具
+  wfuzz                        web应用fuzz工具
+  whatweb                      web指纹识别
+```
+```
+siusiu exec help  | grep 扫描    
+  gobuster                     目录扫描工具（dirsearch拉跨时备用）
+  nmap                         主机发现、端口扫描、服务扫描、版本识别
+  wpscan                       wordpress漏洞扫描工具
+  xray                         漏洞扫描器
+```
 ### 构建工作流
-
+使用linkfinder获取js文件中的url,然后用wc -l 统计数目
 ```shell
 siusiu exec linkfinder -i target.js -o cli | wc -l
+``` 
+使用fetcher 将当前目录制作为目录字典
+```
+siusiu exec fetcher ./ > dict.txt 
 ``` 
 
 ### 关于searchsploit的一些使用说明
