@@ -3,6 +3,7 @@ package routers
 import (
 	"log"
 	"os"
+	"os/user"
 
 	"github.com/ShangRui-hash/siusiu/controllers"
 	"github.com/ShangRui-hash/siusiu/pkg/exec"
@@ -434,6 +435,24 @@ func Init(shell *ishell.Shell) error {
 				c.Args[0], _ = os.Getwd()
 			}
 			params := append([]string{"run", "--rm", "-it", "-v", c.Args[0] + ":/dict", "-w", "/dict", "rickshang/fetcher", "."})
+			exec.CmdExec("docker", params...)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "pacu",
+		Help: "aws 利用框架",
+		Func: func(c *ishell.Context) {
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", "~ /.aws:/root/.aws", "rhinosecuritylabs/pacu:latest"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "subfinder",
+		Help: "子域名查询工具",
+		Func: func(c *ishell.Context) {
+			//获取家目录
+			user, _ := user.Current()
+			params := append([]string{"run", "--rm", "-it", "-v", user.HomeDir + "/.config/subfinder/:/root/.config/subfinder/", "--network", "host", "rickshang/subfinder"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})
