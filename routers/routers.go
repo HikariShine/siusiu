@@ -36,7 +36,15 @@ func Init(shell *ishell.Shell) error {
 				log.Println("os.Getwd failed,err:", err)
 				return
 			}
-			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/root/.local/share/sqlmap/output/", "-w", "/root/.local/share/sqlmap/output/", "rickshang/sqlmap:1.6.1"}, c.Args...)
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/root/.local/share/sqlmap/output/", "-w", "/root/.local/share/sqlmap/output/", "rickshang/sqlmap", "sqlmap"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "sqlmapapi",
+		Help: "sqlmap api",
+		Func: func(c *ishell.Context) {
+			params := append([]string{"run", "--rm", "-p", "65533:65533", "-it", "rickshang/sqlmap", "sqlmapapi", "-s", "-H", "127.0.0.1", "-p", "65533"}, c.Args...)
 			exec.CmdExec("docker", params...)
 		},
 	})
