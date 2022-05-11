@@ -465,8 +465,8 @@ func Init(shell *ishell.Shell) error {
 		},
 	})
 	shell.AddCmd(&ishell.Cmd{
-		Name: "githack",
-		Help: "git 泄漏利用工具",
+		Name: "githack:lijiejie",
+		Help: "git 泄漏利用工具(只会下载当前版本)",
 		Func: func(c *ishell.Context) {
 			currentDir, err := os.Getwd()
 			if err != nil {
@@ -477,6 +477,15 @@ func Init(shell *ishell.Shell) error {
 			exec.CmdExec("docker", params...)
 		},
 	})
+	shell.AddCmd(&ishell.Cmd{
+		Name: "githack:bugscanteam",
+		Help: "git 泄漏利用工具(会下载.git文件夹，方便检索历史版本)",
+		Func: func(c *ishell.Context) {
+			params := []string{"run", "--rm", "-it", "rickshang/githack:bugscanteam", "/bin/sh"}
+			exec.CmdExec("docker", params...)
+		},
+	})
+
 	//未找到命令时
 	shell.NotFound(controllers.NotFoundHandler)
 	return nil
