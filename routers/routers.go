@@ -249,6 +249,20 @@ func Init(shell *ishell.Shell) error {
 		},
 	})
 	shell.AddCmd(&ishell.Cmd{
+		Name: "rip-svn.pl",
+		Help: "rip-svn.pl 文件泄漏利用脚本(可以下载.svn文件夹，方便检查历史版本)",
+		Func: func(c *ishell.Context) {
+			currentDir, err := os.Getwd()
+			if err != nil {
+				log.Println("os.Getwd failed,err:", err)
+				return
+			}
+			params := append([]string{"run", "--rm", "-it", "--network", "host", "-v", currentDir + ":/work", "-w", "/work", "k0st/alpine-dvcs-ripper"}, c.Args...)
+			exec.CmdExec("docker", params...)
+		},
+	})
+
+	shell.AddCmd(&ishell.Cmd{
 		Name: "gobuster",
 		Help: "目录扫描工具（dirsearch拉跨时备用）",
 		Func: func(c *ishell.Context) {
